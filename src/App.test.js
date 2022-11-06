@@ -121,4 +121,24 @@ describe('Testing App Component', () => {
 
     expect(counter.textContent).toEqual('-2')
   })
+  test('input value is updated correctly', () => {
+    render(<App />);
+     const input = screen.getByRole('textbox');
+     userEvent.type(input, 'React');
+  
+     expect(input.value).toBe('React')
+  })
+})
+
+import { Input } from './App'
+
+test('Call the callback every time the input value is changed', () => {
+  const handleChange = jest.fn();
+
+  render(<Input handleChange={handleChange} inputValue='' />)
+
+  const input = screen.getByRole('textbox');
+  userEvent.type(input, 'React');
+
+  expect(handleChange).toHaveBeenCalledTimes(5);
 })

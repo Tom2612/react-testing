@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import User from './User';
+import Input from './Input';
 
 const App = () => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState('');
 
     const [counter, setCounter] = useState(0);
+
+    const [inputValue, setInputValue] = useState('');
+
+    const handleChange = (event) => {
+        setInputValue(event.target.value);
+    };
 
     const increment = () => {
         setCounter(prev => ++prev)
@@ -32,6 +39,7 @@ const App = () => {
             <h2 data-testid="counter">{counter}</h2>
             <button onClick={decrement}>Decrement</button>
             <button onClick={increment}>Increment</button>
+            <Input handleChange={handleChange} inputValue={inputValue} />
         </div>
     );  
 };
